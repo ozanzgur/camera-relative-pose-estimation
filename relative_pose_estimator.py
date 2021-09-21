@@ -12,12 +12,12 @@ class RelativePoseEstimator:
 		self.n_get_new_features = 1500
 
 	def process_next(self, new_frame : np.array):
-		# Process seconda frame and estimate pose
+		# Process second frame and estimate pose
 		self.px_ref, px_cur = pose_utils.featureTracking(self.last_frame, new_frame, self.px_ref)
 		E, mask = cv2.findEssentialMat(px_cur, self.px_ref, focal = self.cp.fx, pp = self.cp.size, method = cv2.RANSAC, prob = 0.999, threshold = 1.0)
 		_, cur_R, cur_t, mask = cv2.recoverPose(E, px_cur, self.px_ref, focal=self.cp.fx, pp = self.cp.size)
 
-		# There are not enough features to track
+		# When there are not enough features to track, get new features
 		if px_cur.shape[0] < self.n_get_new_features:
 			self.get_new_features()
 
