@@ -15,23 +15,23 @@ cp = CameraParameters()
 Detect features from the first frame and get their coordinates. These features will be matched
 with the ones in the next frame for pose estimation.
 cv2.FastFeatureDetector is used for feature detection.
-```
+```python
 detector = cv2.FastFeatureDetector_create(threshold=25, nonmaxSuppression=True)
 px_ref = detector.detect(frame)
 ```
 #### 3- Match Features in the Next Frame
-```
+```python
 kp2, st, err = cv2.calcOpticalFlowPyrLK(image_ref, image_cur, px_ref, None, **lk_params)
 ```
 #### 4- Calculate Essential Matrix
-```
+```python
 E, mask = cv2.findEssentialMat(px_cur, self.px_ref, focal = self.cp.fx,
             pp = self.cp.size, method = cv2.RANSAC, prob = 0.999, threshold = 1.0)
 ```
 #### 5- Estimate Pose
 Estimate pose from the essential matrix using the method in:
 [David Nistér. An efficient solution to the five-point relative pose problem.](https://dl.acm.org/doi/10.1109/TPAMI.2004.17)
-```
+```python
 _, cur_R, cur_t, mask = cv2.recoverPose(E, px_cur, self.px_ref, focal=self.cp.fx, pp = self.cp.size)
 ```
 
