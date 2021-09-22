@@ -37,5 +37,5 @@ _, cur_R, cur_t, mask = cv2.recoverPose(E, px_cur, self.px_ref, focal=self.cp.fx
 
 #### References
 
-[https://github.com/uoip/monoVO-python](https://github.com/uoip/monoVO-python)
-[David Nistér. An efficient solution to the five-point relative pose problem.](https://dl.acm.org/doi/10.1109/TPAMI.2004.17)
+- [https://github.com/uoip/monoVO-python](https://github.com/uoip/monoVO-python)
+- [David Nistér. An efficient solution to the five-point relative pose problem.](https://dl.acm.org/doi/10.1109/TPAMI.2004.17)
